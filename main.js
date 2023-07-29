@@ -28,5 +28,28 @@ function getComputerSelection() {
   }
   return computerSelection;
 }
-console.log(getPlayerSelection());
-console.log(getComputerSelection());
+function playRound() {
+  let playerSelection = getPlayerSelection();
+  let computerSelection = getComputerSelection();
+  return evaluateRound(playerSelection, computerSelection);
+}
+function evaluateRound(playerSelection, computerSelection) {
+  if (playerSelection !== computerSelection) {
+    if (playerSelection === "rock" && computerSelection === "scissors") {
+      return `You win! ${playerSelection} beats ${computerSelection}`;
+    } else if (playerSelection === "paper" && computerSelection === "rock") {
+      return `You win! ${playerSelection} beats ${computerSelection}`;
+    } else if (
+      playerSelection === "scissors" &&
+      computerSelection === "paper"
+    ) {
+      return `You win! ${playerSelection} beats ${computerSelection}`;
+    } else {
+      return `You loose! ${computerSelection} beats ${playerSelection}`;
+    }
+  } else {
+    return "It's a draw!";
+  }
+}
+
+console.log(playRound());
