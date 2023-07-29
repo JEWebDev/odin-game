@@ -51,5 +51,32 @@ function evaluateRound(playerSelection, computerSelection) {
     return "It's a draw!";
   }
 }
+function evaluateSet(playerWins, computerWins) {
+  console.log(`Player wins: ${playerWins}\nComputer wins: ${computer}`);
+  if (playerWins > computerWins) {
+    console.log("The player wins the set");
+  } else {
+    console.log("The computer wins the set");
+  }
+}
 
-console.log(playRound());
+function game() {
+  let playerWinsCount = 0;
+  let computerWinsCount = 0;
+  let result = "";
+  for (let i = 0; i < 5; i++) {
+    result = playRound();
+    if (result.includes("win")) {
+      playerWinsCount++;
+      console.log(result);
+    } else if (result.includes("loose")) {
+      computerWinsCount++;
+      console.log(result);
+    } else {
+      console.log(result);
+      i--;
+    }
+  }
+  evaluateSet(playerWinsCount, computerWinsCount);
+}
+game();
