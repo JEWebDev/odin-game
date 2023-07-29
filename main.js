@@ -15,4 +15,18 @@ function validatePlayerSelection(playerSelection) {
     getPlayerSelection();
   }
 }
-getPlayerSelection();
+function getComputerSelection() {
+  let choice = parseInt(Math.random() * (4 - 1) + 1);
+  let computerSelection = "";
+
+  if (choice === 1) {
+    computerSelection = "rock";
+  } else if (choice === 2) {
+    computerSelection = "paper";
+  } else if (choice === 3) {
+    computerSelection = "scissors";
+  }
+  return computerSelection;
+}
+console.log(getPlayerSelection());
+console.log(getComputerSelection());
