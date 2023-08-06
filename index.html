@@ -3,9 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Odin Project | Rock, Paper, Scissors Game</title>
+    <title>The Odin Project | Rock Paper Scissors</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="images/favicon-32x32.png"
+      type="image/x-icon"
+    />
   </head>
   <body>
-    <script src="main.js"></script>
+    <div class="modal hidden">
+      <div class="modal-content hidden">
+        <div class="modal-header">
+          <h2>RULES</h2>
+          <button>
+            <img src="/images/icon-close.svg" alt="close" class="close-btn" />
+          </button>
+        </div>
+        <img src="/images/image-rules.svg" alt="rules" />
+      </div>
+    </div>
+    <header class="header">
+      <img src="/images/logo.svg" alt="logo" class="logo" />
+      <div class="score-container">
+        <h2>SCORE</h2>
+        <p class="score-value">0</p>
+      </div>
+    </header>
+    <section class="choose-section">
+      <div
+        class="border paper position-left"
+        data-name="paper"
+        onclick="evaluateRound(this)"
+      >
+        <div class="option">
+          <img src="/images/icon-paper.svg" alt="paper" />
+        </div>
+      </div>
+
+      <div class="border rock" data-name="rock" onclick="evaluateRound(this)">
+        <div class="option">
+          <img src="/images/icon-rock.svg" alt="rock" />
+        </div>
+      </div>
+
+      <div
+        class="border scissors position-right"
+        data-name="scissors"
+        onclick="evaluateRound(this)"
+      >
+        <div class="option">
+          <img src="/images/icon-scissors.svg" alt="scissors" />
+        </div>
+      </div>
+    </section>
+    <section class="results-section hidden">
+      <div class="player-selection">
+        <h2>YOU PICKED</h2>
+        <div class="player-placeholder"></div>
+      </div>
+      <div class="final-result hidden">
+        <h2 class="result-text">YOU LOOSE</h2>
+        <button class="play-again-btn">Play again</button>
+      </div>
+      <div class="computer-selection">
+        <h2>COMPUTER PICKED</h2>
+        <div class="computer-placeholder"></div>
+      </div>
+    </section>
+    <footer class="footer">
+      <button class="rules-btn">RULES</button>
+      <div class="attribution">
+        <p>
+          Challenge from
+          <a href="https://www.frontendmentor.io/">Frontend mentor</a> Coded by
+          <a href="#">Juan Esparza</a>
+        </p>
+      </div>
+    </footer>
+    <script src="/main.js"></script>
   </body>
 </html>
