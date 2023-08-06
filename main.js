@@ -1,82 +1,146 @@
-function getPlayerSelection() {
-  let playerSelection = prompt("Choose Rock, Paper or Scissors");
-  let election = validatePlayerSelection(playerSelection);
-  return election;
+let playerScore = 0;
+//#region modal window
+// MODAL WINDOW
+rulesBtn = document.querySelector(".rules-btn");
+closeBtn = document.querySelector(".close-btn");
+
+modalBg = document.querySelector(".modal");
+modalContent = document.querySelector(".modal-content");
+// EVENT LISTENERS
+rulesBtn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
+modalBg.addEventListener("click", closeModal);
+
+// FUNCTIONS
+function openModal() {
+  modalBg.classList.remove("hidden");
+  modalContent.classList.remove("hidden");
 }
-function validatePlayerSelection(playerSelection) {
-  let election = playerSelection.toLowerCase();
-  if (election === "rock") {
-    return election;
-  } else if (election === "paper") {
-    return election;
-  } else if (election === "scissors") {
-    return election;
-  } else {
-    getPlayerSelection();
-  }
+function closeModal() {
+  modalBg.classList.add("hidden");
+  modalContent.classList.add("hidden");
+}
+//#endregion
+
+//#region choose section
+
+const rules = [
+  {
+    choice: "rock",
+    beats: "scissors",
+  },
+  {
+    choice: "paper",
+    beats: "rock",
+  },
+  {
+    choice: "scissors",
+    beats: "paper",
+  },
+];
+function getPlayerSelection(e) {
+  let choice = e.dataset.name;
+  let playerChoice = rules.find((rule) => rule.choice === choice);
+  return playerChoice;
 }
 function getComputerSelection() {
-  let choice = parseInt(Math.random() * (4 - 1) + 1);
-  let computerSelection = "";
-
-  if (choice === 1) {
-    computerSelection = "rock";
-  } else if (choice === 2) {
-    computerSelection = "paper";
-  } else if (choice === 3) {
-    computerSelection = "scissors";
-  }
-  return computerSelection;
+  const index = Math.floor(Math.random() * 3);
+  return rules[index];
 }
-function playRound() {
-  let playerSelection = getPlayerSelection();
+function initStepTwo() {
+  const chooseSection = document.querySelector(".choose-section");
+  const resultsSection = document.querySelector(".results-section");
+
+  chooseSection.classList.toggle("hidden");
+  resultsSection.classList.toggle("hidden");
+}
+
+//#endregion
+
+//#region RESULTS
+function displayChoices(player, computer) {
+  const playerPlaceholder = document.querySelector(".player-placeholder");
+  const computerPlaceholder = document.querySelector(".computer-placeholder");
+
+  playerPlaceholder.innerHTML = `
+  <div class="border ${player}">
+    <div class= "option">
+      <img src="/images/icon-${player}.svg" alt="${player}"/>
+    </div>
+  </div>
+  `;
+  setTimeout(() => {
+    computerPlaceholder.innerHTML = `
+    <div class="border ${computer}">
+      <div class= "option">
+        <img src="/images/icon-${computer}.svg" alt="${computer}"/>
+      </div>
+    </div>
+    `;
+  }, "1000");
+}
+function isWinner(results) {
+  return results[0].beats === results[1].choice;
+}
+
+function defineWinner(playerSelection, computerSelection) {
+  let resultsArray = [playerSelection, computerSelection];
+  let playerWins = isWinner(resultsArray);
+  let computerWins = isWinner(resultsArray.reverse());
+
+  const resultsContainer = document.querySelector(".final-result");
+  const resultText = document.querySelector(".result-text");
+  const scoreText = document.querySelector(".score-value");
+  const playAgainBtn = document.querySelector(".play-again-btn");
+
+  playAgainBtn.addEventListener("click", playAgain);
+
+  if (playerWins) {
+    resultText.textContent = "YOU WIN";
+    playerScore++;
+    console.log(playerScore);
+    setTimeout(() => {
+      scoreText.textContent = playerScore;
+    }, 1600);
+  } else if (computerWins) {
+    resultText.textContent = "YOU LOOSE";
+    if (playerScore >= 1) {
+      playerScore--;
+    }
+    setTimeout(() => {
+      scoreText.textContent = playerScore;
+    }, 1600);
+  } else {
+    resultText.textContent = "DRAW";
+  }
+
+  setTimeout(() => {
+    resultsContainer.classList.toggle("hidden");
+  }, 1300);
+}
+function evaluateRound(e) {
+  let playerSelection = getPlayerSelection(e);
   let computerSelection = getComputerSelection();
-  return evaluateRound(playerSelection, computerSelection);
+
+  initStepTwo();
+  displayChoices(playerSelection.choice, computerSelection.choice);
+  defineWinner(playerSelection, computerSelection);
 }
-function evaluateRound(playerSelection, computerSelection) {
-  if (playerSelection !== computerSelection) {
-    if (playerSelection === "rock" && computerSelection === "scissors") {
-      return `You win! ${playerSelection} beats ${computerSelection}`;
-    } else if (playerSelection === "paper" && computerSelection === "rock") {
-      return `You win! ${playerSelection} beats ${computerSelection}`;
-    } else if (
-      playerSelection === "scissors" &&
-      computerSelection === "paper"
-    ) {
-      return `You win! ${playerSelection} beats ${computerSelection}`;
-    } else {
-      return `You loose! ${computerSelection} beats ${playerSelection}`;
-    }
-  } else {
-    return "It's a draw!";
-  }
+//#endregion
+
+//#region Play Again
+function resetPlaceholder() {
+  const placeholder = document.querySelector(".computer-placeholder");
+  placeholder.innerHTML = "";
 }
-function evaluateSet(playerWins, computerWins) {
-  console.log(`Player wins: ${playerWins}\nComputer wins: ${computer}`);
-  if (playerWins > computerWins) {
-    console.log("The player wins the set");
-  } else {
-    console.log("The computer wins the set");
-  }
+function playAgain() {
+  const chooseSection = document.querySelector(".choose-section");
+  const resultsSection = document.querySelector(".results-section");
+  const resultsContainer = document.querySelector(".final-result");
+  resetPlaceholder();
+  resultsContainer.classList.toggle("hidden");
+  resultsSection.classList.toggle("hidden");
+  chooseSection.classList.toggle("hidden");
 }
 
-function game() {
-  let playerWinsCount = 0;
-  let computerWinsCount = 0;
-  let result = "";
-  for (let i = 0; i < 5; i++) {
-    result = playRound();
-    if (result.includes("win")) {
-      playerWinsCount++;
-      console.log(result);
-    } else if (result.includes("loose")) {
-      computerWinsCount++;
-      console.log(result);
-    } else {
-      console.log(result);
-      i--;
-    }
-  }
-  evaluateSet(playerWinsCount, computerWinsCount);
-}
-game();
+//#endregion

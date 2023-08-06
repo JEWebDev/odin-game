@@ -3,61 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
+    <title>The Odin Project | Rock Paper Scissors</title>
     <link rel="stylesheet" href="css/style.css" />
-    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <link
+      rel="shortcut icon"
+      href="images/favicon-32x32.png"
+      type="image/x-icon"
+    />
   </head>
   <body>
+    <div class="modal hidden">
+      <div class="modal-content hidden">
+        <div class="modal-header">
+          <h2>RULES</h2>
+          <button>
+            <img src="/images/icon-close.svg" alt="close" class="close-btn" />
+          </button>
+        </div>
+        <img src="/images/image-rules.svg" alt="rules" />
+      </div>
+    </div>
     <header class="header">
-      <a href="#"><img src="/images/logo.svg" alt="Rock Paper Scissors" /></a>
+      <img src="/images/logo.svg" alt="logo" class="logo" />
       <div class="score-container">
-        <p>SCORE</p>
-        <p class="player-score">12</p>
+        <h2>SCORE</h2>
+        <p class="score-value">0</p>
       </div>
     </header>
-    <main class="main-section">
-      <div class="choice-wrapper">
-        <div class="border paper">
-          <button class="btn paper">
-            <img
-              src="/images/icon-paper.svg"
-              alt="closed hand icon for rock, paper, scissors"
-            />
-          </button>
-        </div>
-        <div class="border rock">
-          <button class="btn rock">
-            <img
-              src="/images/icon-rock.svg"
-              alt="open hand icon for rock, paper, scissors"
-            />
-          </button>
-        </div>
-        <div class="border scissors">
-          <button class="btn scissors">
-            <img
-              src="/images/icon-scissors.svg"
-              alt="hand making scissors pose for rock, paper, scissors"
-            />
-          </button>
+    <section class="choose-section">
+      <div
+        class="border paper position-left"
+        data-name="paper"
+        onclick="evaluateRound(this)"
+      >
+        <div class="option">
+          <img src="/images/icon-paper.svg" alt="paper" />
         </div>
       </div>
-    </main>
+
+      <div class="border rock" data-name="rock" onclick="evaluateRound(this)">
+        <div class="option">
+          <img src="/images/icon-rock.svg" alt="rock" />
+        </div>
+      </div>
+
+      <div
+        class="border scissors position-right"
+        data-name="scissors"
+        onclick="evaluateRound(this)"
+      >
+        <div class="option">
+          <img src="/images/icon-scissors.svg" alt="scissors" />
+        </div>
+      </div>
+    </section>
+    <section class="results-section hidden">
+      <div class="player-selection">
+        <h2>YOU PICKED</h2>
+        <div class="player-placeholder"></div>
+      </div>
+      <div class="final-result hidden">
+        <h2 class="result-text">YOU LOOSE</h2>
+        <button class="play-again-btn">Play again</button>
+      </div>
+      <div class="computer-selection">
+        <h2>COMPUTER PICKED</h2>
+        <div class="computer-placeholder"></div>
+      </div>
+    </section>
     <footer class="footer">
-      <button class="modal-btn">RULES</button>
+      <button class="rules-btn">RULES</button>
     </footer>
-    <!-- <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-      >. Coded by <a href="#">Your Name Here</a>.
-    </div> -->
+    <script src="/main.js"></script>
   </body>
 </html>
