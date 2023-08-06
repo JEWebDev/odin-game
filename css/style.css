@@ -278,6 +278,13 @@ body {
   align-items: center;
   justify-content: center;
 }
+.footer .attribution p {
+  font-size: 1.8rem;
+  color: #fff;
+}
+.footer .attribution a {
+  color: var(--rock-grad-2);
+}
 .footer .rules-btn {
   position: absolute;
   right: 5rem;
