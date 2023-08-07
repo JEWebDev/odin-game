@@ -73,7 +73,7 @@ function displayChoices(player, computer) {
     computerPlaceholder.innerHTML = `
     <div class="border ${computer}">
       <div class= "option">
-        <img src="/images/icon-${computer}.svg" alt="${computer}"/>
+        <img src="images/icon-${computer}.svg" alt="${computer}"/>
       </div>
     </div>
     `;
