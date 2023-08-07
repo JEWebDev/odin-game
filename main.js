@@ -65,7 +65,7 @@ function displayChoices(player, computer) {
   playerPlaceholder.innerHTML = `
   <div class="border ${player}">
     <div class= "option">
-      <img src="images/icon-${player}.svg" alt="${player}"/>
+      <img src="../images/icon-${player}.svg" alt="${player}"/>
     </div>
   </div>
   `;
@@ -73,7 +73,7 @@ function displayChoices(player, computer) {
     computerPlaceholder.innerHTML = `
     <div class="border ${computer}">
       <div class= "option">
-        <img src="images/icon-${computer}.svg" alt="${computer}"/>
+        <img src="../images/icon-${computer}.svg" alt="${computer}"/>
       </div>
     </div>
     `;

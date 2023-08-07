@@ -132,7 +132,7 @@ body {
   height: 100%;
   max-height: 80rem;
 
-  background: url("images/bg-triangle.svg");
+  background: url("../images/bg-triangle.svg");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
